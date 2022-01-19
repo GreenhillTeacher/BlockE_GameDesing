@@ -9,6 +9,7 @@ import os
 os.system('cls')
 #Program is Average of 3 tests
 
+#
 #Declare and Assign values
 test1=89
 test2=78.5
