@@ -12,8 +12,8 @@ os.system('cls')
 
 var1=10
 var2=2
-var3=2.9
-var4=5
+# var3=2.9
+# var4=5
 
 #Calculate equation given
 # print(2**4)
