@@ -26,7 +26,7 @@ while check:
         print("BAd")
     else:
         check=False
-print("ready to play te game")
+print("ready to play the game")
 for i in range(len(word)):
     if letter == word[i]:
         print(letter, end= " ")
