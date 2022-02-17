@@ -20,7 +20,7 @@ def selectWord():
     # randy= random.randint(0,size)
     # print(randy)
     # word=fruits[randy]
-    # print(word)
+    # print(word)+
     word=random.choice(fruits)
 
 def guessFunction():
