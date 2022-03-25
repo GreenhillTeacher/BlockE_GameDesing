@@ -135,7 +135,7 @@ while check:
     if case.type ==pygame.MOUSEBUTTONDOWN:
         mouse_pos=pygame.mouse.get_pos()
         print(mouse_pos)
-        if ((mouse_pos[0] >20 and mouse_pos[0] <60) and (mouse_pos[1] >250 and mouse_pos[1] <290))or INST :
+        if ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >250 and mouse_pos[1] <290))or INST :
             MAIN=False
             screen.fill(background)
             TitleMenu("INSTRUCTIONS")
