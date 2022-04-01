@@ -16,8 +16,9 @@
 # K_SPACE               jump
 #initialize pygame
 
-import os, random, time, pygame, math
-
+import os, random, time, pygame, math, datetime
+os.system('cls')
+name=input("What is your name? ")
 #initialize pygame
 pygame.init()
 
@@ -58,7 +59,9 @@ BLACK=(0,0,0)
 TITLE_FNT=pygame.font.SysFont('comicsans', 80)
 MENU_FNT=pygame.font.SysFont('comicsans', 40)
 INST_FNT=pygame.font.SysFont('comicsans', 30)
+#Create square fr menu
 
+squareM=pygame.Rect(xMs,yMs,wb,hb)
 #Create Title
 def TitleMenu(Message):
     text=TITLE_FNT.render(Message, 1, (255,0,0))
@@ -67,10 +70,6 @@ def TitleMenu(Message):
     #x value = WIDTH/2 - wText/2
     xt=WIDTH/2-text.get_width()/2
     screen.blit(text,(xt,50))
-#Create First button
-#Create square fr menu
-
-squareM=pygame.Rect(xMs,yMs,wb,hb)
 #This is a function uses a parameter
 def MainMenu(Mlist):
     txty=243
@@ -100,6 +99,8 @@ def instr():
     myFile=open('ClassStuff\CircleEatsSquare\instructions.txt', 'r')
     yi=150
     stuff= myFile.readlines()
+
+
     print(stuff)
     for line in stuff:
         print(line)
@@ -109,6 +110,48 @@ def instr():
         pygame.time.delay(50)
         yi+=50
     myFile.close()
+def keepScore(score):
+    date=datetime.datetime.now()
+    print(date.strftime('%m/%d/%Y'))
+    scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
+ 
+    #open a file and write in it 
+    # when y write it erases the prev 
+    myFile=open('ClassStuff\sce.txt','a') 
+    myFile.write(scoreLine)
+    myFile.close()
+def scoreBoard():
+    myFile=open('ClassStuff\CircleEatsSquare\sce.txt', 'r')
+    yi=150
+    stuff= myFile.readlines()
+    myFile.close()
+    stuff.sort()
+    N=len(stuff)-1
+    temp=[]
+    j=0
+    for i in range(N, -1, -1):
+        print(i,stuff[i])
+        # temp[i]=stuff
+        temp[j]=stuff[i]
+        j +=1
+    for t in range(5):
+        text=INST_FNT.render(stuff[i], 1, BLACK)
+        screen.blit(text, (40,yi))
+        pygame.display.update()
+        pygame.time.delay(50)
+        yi+=50
+    
+def keepScore(score):
+    date=datetime.datetime.now()
+    print(date.strftime('%m/%d/%Y'))
+    scoreLine='\n'+str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
+ 
+    #open a file and write in it 
+    # when y write it erases the prev 
+    myFile=open('ClassStuff\CircleEatsSquare\sce.txt','a') 
+    myFile.write(scoreLine)
+    myFile.close()
+
 def playGame():
     move=5 #pixels
     #square variables
@@ -201,18 +244,25 @@ def playGame():
 #sq_color=colors.get('navy')
 #Making a rand c f the square
 changeColor()
+
+#==============================================
+#
+#Beginning  main prram
 sq_color=colors.get(randColor)
 keys=pygame.key.get_pressed()
 mouse_pos=(0,0)
-
+screCk=True
 first=True
+# add xm and ym
 while check:
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
         if case.type ==pygame.MOUSEBUTTONDOWN:
             mouse_pos=pygame.mouse.get_pos()
-        print(mouse_pos)
+            #xm= mouse_pos[0]
+            #ym=
+        # print(mouse_pos)
     keys=pygame.key.get_pressed() #this returns a list
     if MAIN:
         screen.fill(background)
@@ -254,13 +304,17 @@ while check:
         if keys[pygame.K_ESCAPE]:
             LEV_III=False
             MAIN=True
-    if SCORE:
+    if SCORE and screCk:
         screen.fill(background)
         TitleMenu("SCOREBOARD")
+        scoreBoard()
         #call funct t print scres
+        screCk=False
+    if SCORE:
         if keys[pygame.K_ESCAPE]:
             SCORE=False
             MAIN=True
+            screCk=True
     if ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >250 and mouse_pos[1] <290))or INST :
         MAIN=False
         INST=True
@@ -282,6 +336,8 @@ while check:
         
     if ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >550 and mouse_pos[1] <580)) :
         screen.fill(background)
+        
+        keepScore(121)
         text=INST_FNT.render("Make sure you update the score file", 1, BLACK)
         screen.blit(text, (40,200))
         text=INST_FNT.render("before you exit", 1, BLACK)
@@ -292,7 +348,7 @@ while check:
         pygame.time.delay(50)
         MAIN=False
         SCORE=False 
-        pygame.time.delay(1000)
+        pygame.time.delay(3000)
         check=False
     pygame.display.update()
     pygame.time.delay(10)
