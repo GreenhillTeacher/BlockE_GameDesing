@@ -260,8 +260,8 @@ while check:
             check=False
         if case.type ==pygame.MOUSEBUTTONDOWN:
             mouse_pos=pygame.mouse.get_pos()
-            #xm= mouse_pos[0]
-            #ym=
+            xm= mouse_pos[0]
+            ym= mouse_pos[1]
         # print(mouse_pos)
     keys=pygame.key.get_pressed() #this returns a list
     if MAIN:
