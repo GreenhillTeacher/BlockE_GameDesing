@@ -131,15 +131,15 @@ def scoreBoard():
     j=0
     for i in range(N, -1, -1):
         print(i,stuff[i])
-        # temp[i]=stuff
-        temp[j]=stuff[i]
-        j +=1
-    for t in range(5):
-        text=INST_FNT.render(stuff[i], 1, BLACK)
-        screen.blit(text, (40,yi))
-        pygame.display.update()
-        pygame.time.delay(50)
-        yi+=50
+        # temp[j]=stuff[i]
+    #     j +=1
+    # print(temp)
+    # for i in range(N):
+    #     text=INST_FNT.render(temp[i], 1, BLACK)
+    #     screen.blit(text, (40,yi))
+    #     pygame.display.update()
+    #     pygame.time.delay(50)
+    #     yi+=50
     
 def keepScore(score):
     date=datetime.datetime.now()
@@ -253,7 +253,8 @@ keys=pygame.key.get_pressed()
 mouse_pos=(0,0)
 screCk=True
 first=True
-# add xm and ym
+xm=0 
+ym=0
 while check:
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
