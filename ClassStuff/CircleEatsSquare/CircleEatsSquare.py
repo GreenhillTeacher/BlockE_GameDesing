@@ -401,8 +401,3 @@ while check:
 
 os.system('cls')
 pygame.quit()
-
-
-
-
-
