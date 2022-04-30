@@ -381,9 +381,10 @@ while check:
         if keys[pygame.K_ESCAPE]:
             c_first=True
             set_first=True
+
     if ((xm >20 and xm <80) and (ym >550 and ym <580)) :
         screen.fill(background)
-        keepScore(121)
+        keepScore(456)
         text=INST_FNT.render("Make sure you update the score file", 1, BLACK)
         screen.blit(text, (40,200))
         text=INST_FNT.render("before you exit", 1, BLACK)
