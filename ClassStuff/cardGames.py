@@ -49,3 +49,5 @@ def playerCards():
     print("player2 ",player2)
     #I also want to see what the deck looks like before shuffling. We should have
         #done that a while ago... oh well!
+create_DECK()
+playerCards()

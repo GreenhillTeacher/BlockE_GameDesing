@@ -17,7 +17,7 @@
 #initialize pygame
 
 import os, random, time, pygame, math, datetime
-from turtle import screensize
+
 os.system('cls')
 name=input("What is your name? ")
 #initialize pygame
@@ -106,7 +106,7 @@ def instr():
     print(stuff)
     for line in stuff:
         print(line)
-        text=INST_FNT.render(line, 1, BLACK)
+        text=INST_FNT.render(line[ :len(line)-2], 1, BLACK)
         screen.blit(text, (40,yi))
         pygame.display.update()
         pygame.time.delay(50)
@@ -127,21 +127,14 @@ def scoreBoard():
     yi=150
     stuff= myFile.readlines()
     myFile.close()
-    stuff.sort()
-    N=len(stuff)-1
-    temp=[]
-    j=0
-    for i in range(N, -1, -1):
-        print(i,stuff[i])
-        # temp[j]=stuff[i]
-        #     j +=1
-        # print(temp)
-        # for i in range(N):
-        #     text=INST_FNT.render(temp[i], 1, BLACK)
-        #     screen.blit(text, (40,yi))
-        #     pygame.display.update()
-        #     pygame.time.delay(50)
-        #     yi+=50
+    stuff.sort(reverse=True)
+    for line in stuff:
+        print(line)
+        text=INST_FNT.render(line, 1, BLACK)
+        screen.blit(text, (40,yi))
+        pygame.display.update()
+        pygame.time.delay(50)
+        yi+=50
     
 def keepScore(score):
     date=datetime.datetime.now()
@@ -274,6 +267,7 @@ f_SEET=True
 sc_size=False
 set_first=True
 c_first=True
+bg_first=False
 while check:
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
@@ -308,6 +302,7 @@ while check:
             SETT=False
             MAIN=True
             f_SEET=True
+            c_first=True
     if LEV_I:
         screen.fill(background)
         playGame()
@@ -371,17 +366,30 @@ while check:
         screen.fill(background)
         TitleMenu("Screen Size")
         MainMenu(sizeList )
+        c_first=False
         if keys[pygame.K_ESCAPE]:
             sc_size=False
             set_first=True
-    if ((xm >20 and xm <80) and (ym >300 and ym <330))and SETT and c_first:
-        screen.fill(background)
-        TitleMenu("Background Color")
-        c_first=False
-        if keys[pygame.K_ESCAPE]:
-            c_first=True
-            set_first=True
-
+        xm=0
+    print(SETT, xm,ym,c_first)
+    # if ((xm >40 and xm <80) and (ym >300 and ym <330))and SETT and c_first:
+    #     screen.fill(background)
+    #     TitleMenu("Background Color")
+    #     xm=0
+    #     c_first=False
+    #     bg_first=True
+    #     if keys[pygame.K_ESCAPE]:
+    #         c_first=True
+    #         set_first=True
+    # if SETT and bg_first and xm>40:
+    #     screen.fill(background)
+    #     TitleMenu("Background Color")
+    #     print("change clr")
+    #     if keys[pygame.K_ESCAPE]:
+    #         bg_first=False
+    #         c_first=True
+    #         set_first=True
+            
     if ((xm >20 and xm <80) and (ym >550 and ym <580)) :
         screen.fill(background)
         keepScore(456)
